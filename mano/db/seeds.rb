@@ -12,6 +12,7 @@ extra_users.times do
 end
 
 
+
 Transaction.create!(debtor_id: 2, creditor_id: 1, amount: 10, description: Faker::Hacker.say_something_smart, approved: true, closed: false, squaring_event_id: nil, private_trans: false)
 Transaction.create!(debtor_id: 3, creditor_id: 1, amount: 20, description: Faker::Hacker.say_something_smart, approved: true, closed: false, squaring_event_id: nil, private_trans: false)
 Transaction.create!(debtor_id: 4, creditor_id: 1, amount: 5, description: Faker::Hacker.say_something_smart, approved: true, closed: false, squaring_event_id: nil, private_trans: false)
