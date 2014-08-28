@@ -15,4 +15,4 @@ class CreateTransactions < ActiveRecord::Migration
   end
 end
 
- 
+

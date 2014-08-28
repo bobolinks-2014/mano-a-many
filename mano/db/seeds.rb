@@ -6,7 +6,9 @@ User.create!(first_name: "Tanner", last_name: "Blumer", email: "blumer.tanner@gm
 
 extra_users = 50
 extra_users.times do
+
   User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "password", password_confirmation: "password")
+
 end
 
 
@@ -26,4 +28,6 @@ Transaction.create!(debtor_id: 3, creditor_id: 4, amount: 10, description: Faker
 
 200.times do
   Transaction.create!(debtor_id: rand(1..extra_users)+4, creditor_id: rand(1..extra_users)+4, amount: rand(1..100), description: Faker::Commerce.product_name, approved: true, closed: false, squaring_event_id: nil, private_trans: false)
+
 end
+

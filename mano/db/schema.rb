@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827220115) do
+ActiveRecord::Schema.define(version: 20140828014447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "squaring_events", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "transactions", force: true do |t|
     t.integer  "debtor_id"
@@ -25,6 +30,13 @@ ActiveRecord::Schema.define(version: 20140827220115) do
     t.boolean  "approved"
     t.boolean  "closed"
     t.boolean  "private_trans"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_squarings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "squaring_event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
