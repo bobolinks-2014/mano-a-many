@@ -1,0 +1,25 @@
+<!-- create new transaction -->
+<p>hey!!!!!!!!!</p>
+<div ="add-transaction-form">
+  <%= form_for [ current_user, @transaction ] do |f| %>
+    <%= f.label :with %>
+    <%= f.text_field :debtor, placeholder: "friend's email" %>
+    </br>
+    <%= f.label :amount %>
+    <%= f.text_field :amount, placeholder: "money" %>
+    </br>
+    <%= f.label :description %>
+    <%= f.text_field :description, placeholder: "description" %>
+    </br>
+    <%= f.label :lender %>
+    <%= f.radio_button "borrower", false %><br/>
+    </br>
+    <%= f.label :borrower %>
+    <%= f.radio_button "borrower", true %><br/>
+    </br>
+    <%= f.label :private %>
+    <%= f.check_box :private_trans %><br/>
+    </br>
+    <%= f.submit 'submit for approval' %>
+  <% end %>
+</div>

@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 	  if @user.save
 	  	redirect_to root_path
 	  else
+	  	flash.notice = "User Registration failed. Try again."
 	  	render 'new'
 	  end
 	end
