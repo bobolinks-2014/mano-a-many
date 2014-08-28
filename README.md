@@ -22,8 +22,8 @@ Settle up any number of users by pressing settle up.  All transactions the group
 We ain't got no tests.
 
 ##Programmers
-Tanner Blumer
-Joey Chamberlin
-Jeff Keslin
-Steve Pikelny
+* Tanner Blumer
+* Joey Chamberlin
+* Jeff Keslin
+* Steve Pikelny
 
