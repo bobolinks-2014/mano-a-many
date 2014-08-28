@@ -1,0 +1,17 @@
+<!-- profile page: shown after login -->
+<h2>hello, <%= @user.first_name %> <%= @user.last_name %>:</h2>
+
+<div class="transactions-display">
+	<ul class="transactions-list">
+		<% @creditor_trans.each do |transaction| %>
+		<li><a><%= transaction.description %></a></li>
+		<% end %>
+	</ul>
+	<hr>
+	<ul class="transactions-list">
+		<% @debtor_trans.each do |transaction| %>
+		<li><a><%= transaction.description %></a></li>
+		<% end %>
+	</ul>
+</div>
+
