@@ -1,19 +1,17 @@
 class SessionsController < ApplicationController
-	
+  include UsersHelper
 	#GET - login page
 	def new
 	end
 
 	#on press of login button
 	def create
-		@user = User.find_by(email: params[:user][:email])
-  	if @user.nil?
-  		redirect_to root_url			  		
-    elsif @user.authenticate(params[:user][:password])
+		@user = User.find_by(email: user_params[:email])
+    if @user && @user.authenticate(user_params[:password])
 			session[:user_id] = @user.id
 			redirect_to user_url(@user)
 		else
-  		redirect_to root_url			
+  		redirect_to root_url
 		end
 	end
 
