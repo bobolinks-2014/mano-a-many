@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140827220115) do
   create_table "transactions", force: true do |t|
     t.integer  "debtor_id"
     t.integer  "creditor_id"
+    t.integer  "squaring_event_id"
     t.float    "amount"
     t.text     "description"
     t.boolean  "approved"

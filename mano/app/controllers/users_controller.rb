@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	include UsersHelper
-#GET - login page
+
 	def index 
 	end
 
@@ -20,6 +20,9 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		current_user
+		@debtor_trans = Transaction.where(debtor_id: current_user.id)
+		@creditor_trans = Transaction.where(creditor_id: current_user.id)
 	end
 
 

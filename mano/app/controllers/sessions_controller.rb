@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 	
-
+	#GET - login page
 	def new
 	end
 

@@ -6,7 +6,7 @@ User.create!(first_name: "Tanner", last_name: "Blumer", email: "blumer.tanner@gm
 
 extra_users = 50
 extra_users.times do
-  User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "password")
+  User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "password", password_confirmation: "password")
 end
 
 
