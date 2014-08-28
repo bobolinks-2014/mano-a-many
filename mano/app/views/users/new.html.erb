@@ -3,24 +3,24 @@
 	<div id="registration-form">
     <p>
     <%= form_for @user do |f| %>
-      <%= f.label :first_name %><br/>
-      <%= f.text_field :first_name %>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %><br/>
 
-      <%= f.label :last_name %><br/>
-      <%= f.text_field :last_name %>
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %><br/>
 
-      <%= f.label :email %><br/>
-      <%= f.text_field :email %>
+      <%= f.label :email %>
+      <%= f.text_field :email %><br/>
     	
-      <%= f.label :password %><br/>
-      <%= f.password :password %>
+      <%= f.label :password %>
+      <%= f.password_field :password %><br/>
     	
       <%= f.submit 'Register' %>
       <% end %>
   	</p>
 	</div>
 	<div id="send-to-registration">
-	<%= link_to "Register", new_user_path, id: "registration-link" %>
+	<%= link_to "cancel", root_path, id: "cancel-registration" %>
 	</div>
 
 </div>
