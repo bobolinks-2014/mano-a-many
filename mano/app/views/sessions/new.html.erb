@@ -1,0 +1,22 @@
+<div id="login-content">
+	<h3>Log In</h3>
+	<div id="login-form"> 
+		<!-- needs to send to sessions#create not users#create -->
+		<%= form_for(:user, :url => {:controller => 'sessions', :action => 'create'}) do |f| %>
+		  <p>
+	      <%= f.label :email %><br />
+	      <%= f.text_field :email %>
+		  </p>
+		  <p>
+	      <%= f.label :password %><br />
+	      <%= f.password_field :password %>
+		  </p>
+		  <p class="button"><%= f.submit "Log in" %></p>
+		<% end %>	
+	</div>
+	<div id="send-to-registration">
+	<%= link_to "Register", new_user_path, id: "registration-link" %>
+	</div>
+
+</div>
+

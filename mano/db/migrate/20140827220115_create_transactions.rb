@@ -3,9 +3,9 @@ class CreateTransactions < ActiveRecord::Migration
     create_table :transactions do |t|
       t.integer :debtor_id
       t.integer :creditor_id
-      #need squaring_id
-      t.float :amount
-      t.text :description
+      t.integer :squaring_event_id
+      t.float   :amount
+      t.text    :description
       t.boolean :approved
       t.boolean :closed
       t.boolean :private_trans
@@ -14,3 +14,5 @@ class CreateTransactions < ActiveRecord::Migration
     end
   end
 end
+
+ 
