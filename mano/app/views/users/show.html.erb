@@ -1,17 +1,20 @@
 <!-- profile page: shown after login -->
-<h2>hello, <%= @user.first_name %> <%= @user.last_name %>:</h2>
-
-<div class="transactions-display">
-	<ul class="transactions-list">
-		<% @creditor_trans.each do |transaction| %>
-		<li><a><%= transaction.description %></a></li>
-		<% end %>
-	</ul>
-	<hr>
-	<ul class="transactions-list">
-		<% @debtor_trans.each do |transaction| %>
-		<li><a><%= transaction.description %></a></li>
-		<% end %>
-	</ul>
+<%= link_to "Add Transaction", new_user_transaction_path(current_user) %>
+<div id="profile-page-content">
+	<h2>Welcome, <%= @user.first_name %> <%= @user.last_name %>.</h2>
+	<h3>Transactions</h3>
+	<div class="transactions-user-as-creditor">
+		<ul class="transactions-list">
+			<% @creditor_trans.each do |transaction| %>
+			<li>You lent $<%= transaction.amount %>, to <%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %>, for <%= transaction.description %></li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="transactions-user-as-debitor">
+		<ul class="transactions-list">
+			<% @debtor_trans.each do |transaction| %>
+			<li>You borrowed $<%= transaction.amount %>, from <%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %>, for <%= transaction.description %></li>
+			<% end %>
+		</ul>
+	</div>
 </div>
-

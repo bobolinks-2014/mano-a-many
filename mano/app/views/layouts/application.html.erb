@@ -7,8 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+	<% if current_user %>
+		<div id="top-nav-bar">
+			<%= link_to "logout", log_out_path %>
+		</div>
+	<% end %>
+	<div id="content">
+		<p class="flash"><%= flash.notice %></p>
+	
+		<%= yield %>
+	</div>
 </body>
 </html>

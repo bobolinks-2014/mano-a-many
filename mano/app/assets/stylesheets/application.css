@@ -13,3 +13,78 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+ 	font-family: verdana;
+ 	margin:auto;
+ 	text-align: center;
+ }
+
+ #content {
+ 	position: relative;
+ 	top: 50px;
+ }
+
+#top-nav-bar {
+	text-align: right;
+	background-color: rgba(0,255,0,0.2);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 20px 0px;
+}
+
+#top-nav-bar a {
+	padding-right: 20px;
+}
+
+#login-content{
+	border: 2px solid gray;
+	margin:auto;
+	width: 40%;
+	padding: 10px;
+}
+
+#registration-content {
+	border: 2px solid gray;	
+	margin:auto;
+	width: 40%;
+	padding: 10px;
+}
+
+ #profile-page-content {
+ 	text-align: center;
+ }
+
+ form#new_user {
+ 	text-align: left;
+ 	padding-left: 60px;
+ }
+
+ul {
+	width: 60%;
+	margin: auto;
+	padding: 0px;
+}
+
+
+li {
+	list-style: none;
+	padding:10px;
+	border: 1px solid gray;
+	margin: 10px 0px;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+.transactions-user-as-debitor li {
+	background-color: rgba(255,0,0,0.4);
+}
+
+.transactions-user-as-creditor li {
+	background-color: rgba(0,255,0,0.4);
+}

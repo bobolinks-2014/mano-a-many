@@ -1,7 +1,6 @@
 <div id="login-content">
 	<h3>Log In</h3>
 	<div id="login-form">
-		<!-- needs to send to sessions#create not users#create -->
 		<%= form_for(:user, :url => {:controller => 'sessions', :action => 'create'}) do |f| %>
 		  <p>
 	      <%= f.label :email %><br />
