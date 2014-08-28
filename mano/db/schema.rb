@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20140827220115) do
     t.text     "description"
     t.boolean  "approved"
     t.boolean  "closed"
-    t.boolean  "private"
+    t.boolean  "private_trans"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

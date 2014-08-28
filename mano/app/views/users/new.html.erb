@@ -1,0 +1,26 @@
+<div id="registration-content">
+	<h3>Create New User:</h3>
+	<div id="registration-form">
+    <p>
+    <%= form_for @user do |f| %>
+      <%= f.label :first_name %><br/>
+      <%= f.text_field :first_name %>
+
+      <%= f.label :last_name %><br/>
+      <%= f.text_field :last_name %>
+
+      <%= f.label :email %><br/>
+      <%= f.text_field :email %>
+    	
+      <%= f.label :password %><br/>
+      <%= f.password :password %>
+    	
+      <%= f.submit 'Register' %>
+      <% end %>
+  	</p>
+	</div>
+	<div id="send-to-registration">
+	<%= link_to "Register", new_user_path, id: "registration-link" %>
+	</div>
+
+</div>
