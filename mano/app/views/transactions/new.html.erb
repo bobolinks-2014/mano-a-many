@@ -1,9 +1,9 @@
 <!-- create new transaction -->
-<p>hey!!!!!!!!!</p>
+<p>New Transaction:</p>
 <div ="add-transaction-form">
   <%= form_for [ current_user, @transaction ] do |f| %>
     <%= f.label :with %>
-    <%= f.text_field :debtor, placeholder: "friend's email" %>
+    <%= f.text_field :friend_email, placeholder: "friend's email" %>
     </br>
     <%= f.label :amount %>
     <%= f.text_field :amount, placeholder: "money" %>
