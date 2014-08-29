@@ -1,8 +1,9 @@
 class SessionsController < ApplicationController
-  include UsersHelper
+  include SessionsHelper
 	
 	#GET - login page
 	def new
+		session[:user_id] = nil
 	end
 
 	#on press of login button: creates new session
