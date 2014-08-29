@@ -1,0 +1,27 @@
+<!-- Square Up making page -->
+<div id="square-up-page-content">
+	<div id="add-friends-form">
+		<%= form_for @user do |f| %>
+	    <%= f.text_field :friend_email, placeholder: "friend's email" %>
+
+	    <% f.submit "add friend" %>
+		<% end %> 
+	</div>
+	<button>add friends</button>
+	</br>
+	<h4>Transactions</h4>
+	<div class="transactions-for-group">
+		<ul class="transactions-list-for-square">
+			<% @group_transactions.each do |transaction| %>
+				<% if transaction.creditor == @user %>
+					<li>You lent $<%= transaction.amount %>, to <%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %>, for <%= transaction.description %></li>
+				<% else %>
+					<li>You borrowed $<%= transaction.amount %>, from <%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %>, for <%= transaction.description %></li>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+<%= link_to "See Square Up", user_squares_path(@user) %></br>
+<%= link_to "Square ME!", user_squares_path(@user) %></br>
+<%= link_to "Cancel", user_path(@user) %>
+</div>

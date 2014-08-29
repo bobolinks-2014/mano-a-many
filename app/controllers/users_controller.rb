@@ -22,10 +22,7 @@ class UsersController < ApplicationController
 
 	def show
 		current_user
-		@debtor_trans = Transaction.where(debtor_id: current_user.id)
-		@creditor_trans = Transaction.where(creditor_id: current_user.id)
+		@transactions = Transaction.where("debtor_id = ? OR creditor_id = ?", current_user.id, current_user.id).reverse_order
 	end
-
-
 
 end

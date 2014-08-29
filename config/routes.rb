@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :transactions
+  	get "squares" => "squares#new"
+  	post 'squares'  => "squares#create"
   end
+
+
 
 
 end

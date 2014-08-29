@@ -1,19 +1,17 @@
 <!-- user profile page: shown after login -->
-<%= link_to "Add Transaction", new_user_transaction_path(current_user) %>
+<%= link_to "Add Transaction", new_user_transaction_path(@user) %></br>
+<div id="create-square-up"><%= link_to "Create Square Up", user_squares_path(@user) %></div>
 <div id="profile-page-content">
 	<h2>Welcome, <%= @user.first_name %> <%= @user.last_name %>.</h2>
 	<h3>Transactions</h3>
-	<div class="transactions-user-as-creditor">
+	<div class="transactions-for-user">
 		<ul class="transactions-list">
-			<% @creditor_trans.each do |transaction| %>
-			<li>You lent $<%= transaction.amount %>, to <%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %>, for <%= transaction.description %></li>
-			<% end %>
-		</ul>
-	</div>
-	<div class="transactions-user-as-debitor">
-		<ul class="transactions-list">
-			<% @debtor_trans.each do |transaction| %>
-			<li>You borrowed $<%= transaction.amount %>, from <%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %>, for <%= transaction.description %></li>
+			<% @transactions.each do |transaction| %>
+				<% if transaction.creditor == @user %>
+					<li>You lent $<%= transaction.amount %>, to <%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %>, for <%= transaction.description %></li>
+				<% else %>
+					<li>You borrowed $<%= transaction.amount %>, from <%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %>, for <%= transaction.description %></li>
+				<% end %>
 			<% end %>
 		</ul>
 	</div>

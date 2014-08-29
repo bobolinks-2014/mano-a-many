@@ -16,6 +16,10 @@
 
  */
 
+div#create-square-up {
+	text-align: right;
+}
+
 /* body {
  	font-family: verdana;
  	margin:auto;
