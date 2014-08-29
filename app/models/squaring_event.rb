@@ -59,19 +59,19 @@ class SquaringEvent < ActiveRecord::Base
     nil
   end
 
-#   def high_low_match
-#     debtor_creditor = @group_bal_hash.minmax_by{|user, balance| balance}
+  def high_low_match
+    debtor_creditor = @group_bal_hash.minmax_by{|user, balance| balance}
 
-#     debtor = debtor_creditor[0][0]
-#     creditor = debtor_creditor[1][0]
-#     bal = lowest_abs_balance(debtor_creditor)
+    debtor = debtor_creditor[0][0]
+    creditor = debtor_creditor[1][0]
+    bal = lowest_abs_balance(debtor_creditor)
 
-#     {debtor: debtor, creditor: creditor, bal: bal}
-#   end
+    {debtor: debtor, creditor: creditor, bal: bal}
+  end
 
-#   def lowest_abs_balance(debtor_creditor)
-#     debtor_creditor.min_by{|user, balance| balance.abs}[1]
-#   end
+  def lowest_abs_balance(debtor_creditor)
+    debtor_creditor.min_by{|user, balance| balance.abs}[1].abs
+  end
 
 #   def create_transaction(match)
 #     # binding.pry

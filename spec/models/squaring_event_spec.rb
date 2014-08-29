@@ -44,7 +44,7 @@ describe SquaringEvent do
     end
   end
 
-  describe 'ez_match' do
+  describe '#ez_match' do
 
     describe 'when a match exists' do
       before do
@@ -69,7 +69,6 @@ describe SquaringEvent do
       it 'returns a hash with user balances as the third value' do
         expect(@se.ez_match[:bal]).to be_an_instance_of(Float)
       end
-
     end
     describe 'when NO match exists' do
       before do
@@ -81,7 +80,50 @@ describe SquaringEvent do
     end
   end
 
-  describe
+  describe '#lowest_abs_balance' do
 
+  end
 
+  describe '#high_low_match' do
+    before do
+      @se.group_bal_hash = {User.new => 5.3,
+                            User.new(first_name: "steve") => 10.0,
+                            User.new => -1.0,
+                            User.new => -1.2,
+                            User.new(first_name: "tanner") => -9.0,
+                            User.new => -4.1}
+    end
+
+    it 'returns a hash' do
+      expect(@se.high_low_match).to be_an_instance_of(Hash)
+    end
+
+    it 'returns a hash with three items' do
+      expect(@se.high_low_match.length).to eq(3)
+    end
+
+    it 'returns a hash with users as the first value' do
+      expect(@se.high_low_match[:debtor]).to be_an_instance_of(User)
+    end
+
+    it 'returns the correct debtor' do
+      expect(@se.high_low_match[:debtor].first_name).to eq("tanner")
+    end
+
+    it 'returns a hash with users as the second value' do
+      expect(@se.high_low_match[:creditor]).to be_an_instance_of(User)
+    end
+
+    it 'returns the correct creditor' do
+      expect(@se.high_low_match[:creditor].first_name).to eq("steve")
+    end
+
+    it 'returns a hash with user balances as the third value' do
+      expect(@se.high_low_match[:bal]).to be_an_instance_of(Float)
+    end
+
+    it 'returns the lowest absolute value of the two user balances' do
+      expect(@se.high_low_match[:bal]).to eq(9)
+    end
+  end
 end
