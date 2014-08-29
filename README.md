@@ -1,4 +1,5 @@
 # Mano-A-Many 
+[ ![Codeship Status for bobolinks-2014/mano-a-many](https://codeship.io/projects/756d8a80-1151-0132-5385-72f63f219fb7/status)](https://codeship.io/projects/33017)
  This is Spanish for "hand to many"
 
 ##Summary 
