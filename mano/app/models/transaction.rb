@@ -9,4 +9,7 @@ class Transaction < ActiveRecord::Base
   def borrower
   end
 
+  def friend_email
+  end
+
 end
