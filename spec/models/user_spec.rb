@@ -13,26 +13,27 @@ describe User do
       @user = User.create!(first_name: "fname1",
                             last_name: "lname1",
                             email: "at@at.com",
-                            password: "12341234"
-                            )
+                            password: "12341234")
+      @user2 = User.create!(first_name: "fname2",
+                            last_name: "lname2",
+                            email: "at2@at.com",
+                            password: "12341234")
       @transaction1 = Transaction.create!(debtor_id: @user.id,
-                                         creditor_id: nil,
+                                         creditor_id: @user2.id,
                                          amount: 9,
                                          description: Faker::Hacker.say_something_smart,
                                          approved: true,
                                          closed: false,
                                          squaring_event_id: nil,
-                                         private_trans: false
-                                         )
-      @transaction2 = Transaction.create!(debtor_id: nil,
+                                         private_trans: false)
+      @transaction2 = Transaction.create!(debtor_id: @user2.id,
                                          creditor_id: @user.id,
                                          amount: 10,
                                          description: Faker::Hacker.say_something_smart,
                                          approved: true,
                                          closed: false,
                                          squaring_event_id: nil,
-                                         private_trans: false
-                                         )
+                                         private_trans: false)
     end
     it "should return total of debits for a user" do
       expect(@user.sum_debits).to eq(10)
