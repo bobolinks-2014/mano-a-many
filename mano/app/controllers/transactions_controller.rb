@@ -11,14 +11,10 @@ class TransactionsController < ApplicationController
 		@transaction = Transaction.new
 	end
 
-	def create
+	def create 
 		@friend = find_friend
-		if current_user_is_borrower?
-			@transaction = Transaction.new(debtor: current_user, creditor: @friend, amount: transaction_params[:amount], description: transaction_params[:description], private_trans: private_transaction?, approved: false)
-		else
-			@transaction = Transaction.new(debtor: @friend, creditor: current_user, amount: transaction_params[:amount], description: transaction_params[:description], private_trans: private_transaction?, approved: false)			
-		end
-		if @transaction.save
+		current_user_is_borrower ? transaction_as_debtor : transaction_as_creditor
+		if @friend && @transaction.save
 			redirect_to user_path(current_user)
 		else
 			flash.notice = "Transaction not created. Try again."
@@ -26,7 +22,7 @@ class TransactionsController < ApplicationController
 		end
 	end
 
-private
+private #-------------------#
 
 	def find_friend
 	  User.find_by(email: transaction_params[:friend_email])
@@ -36,8 +32,16 @@ private
 		transaction_params[:private_trans] == "1"
 	end
 
-	def current_user_is_borrower?
-		transaction_params[:borrower]
+	def current_user_is_borrower
+		transaction_params[:borrower] == "true"
+	end
+
+	def transaction_as_debtor
+		@transaction = Transaction.new(debtor: current_user, creditor: @friend, amount: transaction_params[:amount], description: transaction_params[:description], private_trans: private_transaction?, approved: false)
+	end
+
+	def transaction_as_creditor
+		@transaction = Transaction.new(debtor: @friend, creditor: current_user, amount: transaction_params[:amount], description: transaction_params[:description], private_trans: private_transaction?, approved: false)			
 	end
 
 end

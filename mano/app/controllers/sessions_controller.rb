@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  include UsersHelper
+  include SessionsHelper
 	
 	#GET - login page
 	def new
