@@ -3,7 +3,7 @@
  This is Spanish for "hand to many"
 
 ##Summary 
-Mano-a-Many is a Rails project for Dev Bootcamp. When a large group of people interact on a daily basis, sometimes borrowing and lending money, sometimes buying coffee or meals, it can get pretty complicated to pay each other back or settle up.
+Mano-a-Many is a Rails project for Dev Bootcamp. When a large group of people interact on a daily basis, sometimes borrowing and lending money, sometimes buying coffee or meals, it can get pretty complicated to pay each other back or settle up.  Mano-a-Many allows you to create a circle of friends and square up your debts with one another. Instead of trying to keep track of your money through a complicated web of transactions between you and your friends, Mano-a-Many does the calculations for you and lets the group know how you can settle your debts with as much simplicity and as few transactions as possible.
 
 ##Installation
 1. Fork this repo.
