@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+
+# ruby '2.0.0'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
@@ -42,17 +44,13 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
-end
-
-group :test do
   gem 'capybara'
   gem 'database_cleaner', '~> 1.3.0'
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
+  gem 'binding_of_caller'
 end
 
-
-gem 'binding_of_caller'
 gem 'rails_12factor'
 
 # Use unicorn as the app server

@@ -1,3 +1,4 @@
+
 require 'pry'
 class SquaringEvent < ActiveRecord::Base
   has_many :transactions
@@ -94,4 +95,5 @@ class SquaringEvent < ActiveRecord::Base
 #     @group_bal_hash[debtor] += bal
 #     @group_bal_hash[creditor] -= bal
 #   end
+
 end
