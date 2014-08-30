@@ -1,5 +1,5 @@
-class SquaresController < ApplicationController
-	
+class SquaringEventController < ApplicationController
+
 	#GET square up page
 	#need some killer jquery action
 	def new
