@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
 	include UsersHelper
 
-	def index 
+	def index
 	end
 
 #GET - render registration page
-	def new 
+	def new
 		@user = User.new
 	end
 
 #POST - create new user via registration page
-	def create 
+	def create
 		@user = User.new(user_params)
 	  if @user.save
 	  	redirect_to root_path
@@ -21,8 +21,8 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		current_user
-		@transactions = Transaction.where("debtor_id = ? OR creditor_id = ?", current_user.id, current_user.id).reverse_order
+		@user = User.find(params[:id])
+		@transactions = Transaction.where("debtor_id = ? OR creditor_id = ?", @user.id, @user.id).reverse_order
 	end
 
 end
