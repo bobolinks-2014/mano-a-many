@@ -6,9 +6,10 @@ describe SquaringEvent do
     @se = SquaringEvent.new
   end
   describe 'relationships' do
-    it { should have_many(:transactions)}
-    it { should have_many(:user_squarings)}
-    it { should have_many(:users).through(:user_squarings)}
+    it { should belong_to(:group) }
+    it { should have_many(:transactions) }
+    it { should have_many(:user_squarings) }
+    it { should have_many(:users).through(:user_squarings) }
   end
 
   #Need to call each expect block with an instance of a SquaringEvent
