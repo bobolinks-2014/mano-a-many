@@ -1,13 +1,17 @@
 <!-- Square Up making page -->
 <div id="square-up-page-content">
+
+<!-- 	on button click, User.find_by(email: params)
+	add li tag with "first_name last_name: email"
+	add li with transaction (line 18ff) -->
+
+
 	<div id="add-friends-form">
 		<%= form_for @user do |f| %>
 	    <%= f.text_field :friend_email, placeholder: "friend's email" %>
-
-	    <% f.submit "add friend" %>
-		<% end %> 
+	    <%= f.submit "add friend", class: "button" %>
+		<% end %>
 	</div>
-	<button>add friends</button>
 	</br>
 	<h4>Transactions</h4>
 	<div class="transactions-for-group">
