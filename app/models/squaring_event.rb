@@ -1,5 +1,7 @@
 class SquaringEvent < ActiveRecord::Base
   has_many :transactions
+  has_many :user_squarings
+  has_many :users, through: :user_squarings
   belongs_to :group
 
   attr_accessor :debtors, :creditors
