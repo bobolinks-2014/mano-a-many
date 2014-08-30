@@ -6,6 +6,9 @@ describe User do
     it { should have_many(:credits).class_name('Transaction').with_foreign_key('debtor_id') }
     it { should have_many(:user_squarings) }
     it { should have_many(:squaring_events), through: 'user_squarings' }
+    it { should have_many(:memberships) }
+    it { should have_many(:groups).through(:memberships) }
+
   end
 
   describe "sum_debits and credits" do
