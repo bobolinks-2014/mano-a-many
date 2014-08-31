@@ -1,0 +1,32 @@
+<!-- Square Up making page -->
+<div id="square-up-page-content">
+
+<!--  on button click, User.find_by(email: params)
+  add li tag with "first_name last_name: email"
+  add li with transaction (line 18ff) -->
+
+
+  <div id="add-friends-form">
+    <!-- Why is the route going to "/stuff/../edit" ???? WTF MAN-->
+    <%= form_for("/users/#{@user.id}/groups/#{@group.id}", method: "patch") do |f| %>
+      <%= f.text_field :friend_email, placeholder: "friend's email" %>
+      <%= f.submit "add friend", class: "button" %>
+    <% end %>
+  </div>
+  </br>
+  <h4>Transactions</h4>
+  <div class="transactions-for-group">
+    <ul class="transactions-list-for-square">
+      <% @group_transactions.each do |transaction| %>
+        <% if transaction.creditor == @user %>
+          <li>You lent $<%= transaction.amount %>, to <%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %>, for <%= transaction.description %></li>
+        <% else %>
+          <li>You borrowed $<%= transaction.amount %>, from <%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %>, for <%= transaction.description %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<%= link_to "Square ME!", new_user_group_squaring_event_path(@user.id,@group.id) %></br>
+<%= link_to "Cancel", user_path(@user) %>
+</div>
+<!-- "/users/#{@user.id}/groups/#{@group.id}/squaring_events/new" -->
