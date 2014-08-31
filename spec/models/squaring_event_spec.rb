@@ -9,6 +9,8 @@ describe SquaringEvent do
   describe 'relationships' do
     it { should belong_to(:group) }
     it { should have_many(:transactions) }
+    it { should have_many(:user_squarings) }
+    it { should have_many(:users).through(:user_squarings) }
   end
 
   describe '#group_balanced?' do
@@ -50,8 +52,8 @@ describe SquaringEvent do
 
     describe 'when a payment match exists' do
       before do
-        @se.debtors = {User.new => -5.0}
-        @se.creditors = {User.new => 5.0}
+        @se.debtors = {User.create => -5.0}
+        @se.creditors = {User.create => 5.0}
       end
       it 'returns a hash' do
         expect(@se.ez_match).to be_an_instance_of(Hash)
@@ -75,8 +77,8 @@ describe SquaringEvent do
     end
     describe 'when NO payment match exists' do
       before do
-        @se.debtors = {User.new => -4.1, User.new => -1.2, User.new => 0}
-        @se.creditors = {User.new => 5.3, User.new => 0}
+        @se.debtors = {User.create => -4.1, User.create => -1.2, User.create => 0}
+        @se.creditors = {User.create => 5.3, User.create => 0}
       end
       it 'returns nil' do
         expect(@se.ez_match).to eq(nil)
@@ -86,13 +88,13 @@ describe SquaringEvent do
 
   describe '#high_low_match' do
     before do
-      @se.debtors   = {User.new => -1.0,
-                       User.new => -1.2,
-                       User.new(first_name: "tanner") => -9.0,
-                       User.new => -4.1}
+      @se.debtors   = {User.create => -1.0,
+                       User.create => -1.2,
+                       User.create(first_name: "tanner") => -9.0,
+                       User.create => -4.1}
 
-      @se.creditors = {User.new => 5.3, 
-                       User.new(first_name: "steve") => 10.0}
+      @se.creditors = {User.create => 5.3, 
+                       User.create(first_name: "steve") => 10.0}
                             
     end
 
@@ -131,20 +133,20 @@ describe SquaringEvent do
 
   describe "#square" do 
     before do
-      @debtors   = {User.new => -1.0,
-                   User.new => -1.2,
-                   User.new => -9.0,
-                   User.new => -4.1,
-                   User.new => -8.4,
-                   User.new => -10.1}
+      @debtors   = {User.create!(password:"1234") => -1.0,
+                   User.create!(password:"1234") => -1.2,
+                   User.create!(password:"1234") => -9.0,
+                   User.create!(password:"1234") => -4.1,
+                   User.create!(password:"1234") => -8.4,
+                   User.create!(password:"1234") => -10.1}
 
-      @creditors = {User.new => 5.3, 
-                   User.new => 10.0,
-                   User.new => 5.1,
-                   User.new => 1.0,
-                   User.new => 2.1,
-                   User.new => 0.3,
-                   User.new => 10.0}
+      @creditors = {User.create!(password:"1234") => 5.3, 
+                   User.create!(password:"1234") => 10.0,
+                   User.create!(password:"1234") => 5.1,
+                   User.create!(password:"1234") => 1.0,
+                   User.create!(password:"1234") => 2.1,
+                   User.create!(password:"1234") => 0.3,
+                   User.create!(password:"1234") => 10.0}
     end
 
     it "returns between 0 and n-1 transactions for a group of size n, which close out all debts" do 
@@ -152,32 +154,28 @@ describe SquaringEvent do
     end
   end
 
-#############################################
-######### NOT SURE HOW TO TEST THIS #########
-#############################################
-
-  pending "#create_transaction" do
-    let(:payment_match) { {debtor: User.new, creditor: User.new, bal:10.0} }
+  describe "#create_transaction" do
+    let(:payment_match) { {debtor: User.create!(password:"1234"), creditor: User.create!(password:"1234"), bal:10.0} }
 
     it "adds an item to self.transactions" do
-      expect {@se.create_transaction(payment_match)}.to change(@se.transactions).by(1)
+      @se.new_transactions = []
+      @se.create_transaction(payment_match)
+
+      expect(@se.new_transactions.size).to eq(1)
     end
 
     it "creates a new Transaction object" do
       @se.create_transaction(payment_match)
-      expect(@se.transactions.last).to be_an_instance_of(Transaction)
+      expect(@se.new_transactions.last).to be_an_instance_of(Transaction)
+    end
+
+    it "saves the transaction to the db" do 
+      starting = Transaction.all.size
+      @se.create_transaction(payment_match)
+      ending = Transaction.all.size
+
+      expect(ending).to eq(starting+1)
     end
   end
 
-####################################################
-######### NOT SURE HOW TO TEST THIS EITHER #########
-####################################################
-
-  pending "#update_group_hash" do
-    let(:payment_match) { {debtor: User.new, creditor: User.new, bal:10.0} }
-
-    it "updates the values of self.group_bal_hash, given a payment_match " do
-      ###
-    end
-  end
 end

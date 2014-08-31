@@ -1,3 +1,5 @@
+require 'pry'
+require 'pp'
 class Group < ActiveRecord::Base
   has_many :squaring_events
   has_many :memberships
@@ -7,7 +9,8 @@ class Group < ActiveRecord::Base
 
   def square
   	square = SquaringEvent.create(group_id: self.id)
-  	square.square(debtors, creditors)
+  	close_old_transactions(square)
+  	new_transactions = square.square(debtors, creditors)
   end
 
   def debtors
@@ -19,8 +22,9 @@ class Group < ActiveRecord::Base
     		debtors[user] = balance
   		end
 		end
+
 		return debtors
-	end  	
+	end
 
   def creditors
 	  users = self.users
@@ -34,10 +38,29 @@ class Group < ActiveRecord::Base
     return creditors
   end
 
-  # def transactions
-  # 	all_transactions = []
-  # 	self.users.debits.where()
-  # 	self.users.credits.where()
-  # end
+  def transactions
+  	all_transactions = []
+  	user_ids = self.users.map {|user| user.id}
 
+  	self.users.each do |user|
+  		all_transactions << user.debits.where(debtor_id: user_ids)
+  	end
+  	all_transactions.flatten!
+  	
+  	all_transactions.delete_if do |transaction| 
+  		transaction.private_trans == true || transaction.closed == true 
+  	end
+
+  	# return all_transactions
+  end
+
+  def close_old_transactions(square)
+
+  	# binding.pry
+  	transactions.each do |transaction|
+  		transaction.update(squaring_event_id: square.id, closed: true)
+  	
+  	end
+
+  end
 end
