@@ -20,7 +20,18 @@ class GroupsController < ApplicationController
   end
 
   def update
-
+    @newUser = User.find_by(email: params["email"])
+    if @newUser
+      @group = Group.find(params["id"])
+      @group.users << @newUser
+      @group.save
+      msg = @newUser
+    else
+      msg = "We're Sorry, invalid e-mail"
+    end
+    respond_to do |format|
+      format.json  { render :json => msg }
+    end
   end
 
 end

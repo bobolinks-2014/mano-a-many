@@ -5,7 +5,9 @@
   add li tag with "first_name last_name: email"
   add li with transaction (line 18ff) -->
 
-
+  <div id="added_friends">
+    <ul></ul>
+  </div>
   <div id="add-friends-form">
     <!-- Why is the route going to "/stuff/../edit" ???? WTF MAN-->
     <%= form_for(@group,url: { controller: "groups", action: "update" }, method: :put) do |f| %>
@@ -29,4 +31,7 @@
 <%= link_to "Square ME!", new_user_group_squaring_event_path(@user.id,@group.id) %></br>
 <%= link_to "Cancel", user_path(@user) %>
 </div>
+<div id="user" visability="none"><%=@user.id%></div>
+<div id="group" visability="none"><%=@group.id%></div>
+
 <!-- "/users/#{@user.id}/groups/#{@group.id}/squaring_events/new" -->
