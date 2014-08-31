@@ -8,8 +8,8 @@
 
   <div id="add-friends-form">
     <!-- Why is the route going to "/stuff/../edit" ???? WTF MAN-->
-    <%= form_for("/users/#{@user.id}/groups/#{@group.id}", method: "patch") do |f| %>
-      <%= f.text_field :friend_email, placeholder: "friend's email" %>
+    <%= form_for(@group,url: { controller: "groups", action: "update" }, method: :put) do |f| %>
+      <%= f.text_field :users, placeholder: "friend's email", value: "" %>
       <%= f.submit "add friend", class: "button" %>
     <% end %>
   </div>
