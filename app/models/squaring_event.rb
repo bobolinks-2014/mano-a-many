@@ -5,10 +5,10 @@ class SquaringEvent < ActiveRecord::Base
   belongs_to :group
 
   attr_accessor :debtors, :creditors, :new_transactions
-  # attr_reader 
+  # attr_reader
 
 
-  def square(debtors, creditors)
+  def consolidated_transactions(debtors, creditors)
     @debtors = debtors
     @creditors = creditors
     @new_transactions = []
@@ -37,11 +37,11 @@ class SquaringEvent < ActiveRecord::Base
   def ez_match
     @debtors.each do |debtor, debtor_balance|
       next if debtor_balance == 0
-      
+
       @creditors.each do |creditor, creditor_balance|
         if debtor_balance.abs == creditor_balance
-          return payment_match = {debtor: debtor, 
-                                  creditor: creditor, 
+          return payment_match = {debtor: debtor,
+                                  creditor: creditor,
                                   bal: creditor_balance}
         end
       end
@@ -55,13 +55,13 @@ class SquaringEvent < ActiveRecord::Base
     creditor = @creditors.max_by {|creditor, balance| balance}[0]
     balance = [ @creditors[creditor], @debtors[debtor].abs ].min
 
-    return payment_match = {debtor: debtor, 
-                            creditor: creditor, 
+    return payment_match = {debtor: debtor,
+                            creditor: creditor,
                             bal: balance}
   end
 
   def create_transaction(payment_match)
-    trans = Transaction.create!(debtor_id: payment_match[:debtor].id,
+    trans = Transaction.new(debtor_id: payment_match[:debtor].id,
                             creditor_id: payment_match[:creditor].id,
                             amount: payment_match[:bal],
                             squaring_event_id: self.id,

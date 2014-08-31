@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../app/models/squaring_event'
 
-describe SquaringEvent do  
+describe SquaringEvent do
   before do
     @se = SquaringEvent.new
   end
@@ -93,9 +93,9 @@ describe SquaringEvent do
                        User.create(first_name: "tanner") => -9.0,
                        User.create => -4.1}
 
-      @se.creditors = {User.create => 5.3, 
+      @se.creditors = {User.create => 5.3,
                        User.create(first_name: "steve") => 10.0}
-                            
+
     end
 
     it 'returns a hash' do
@@ -131,7 +131,7 @@ describe SquaringEvent do
     end
   end
 
-  describe "#square" do 
+  describe "#consolidated_transactions" do
     before do
       @debtors   = {User.create!(password:"1234") => -1.0,
                    User.create!(password:"1234") => -1.2,
@@ -140,7 +140,7 @@ describe SquaringEvent do
                    User.create!(password:"1234") => -8.4,
                    User.create!(password:"1234") => -10.1}
 
-      @creditors = {User.create!(password:"1234") => 5.3, 
+      @creditors = {User.create!(password:"1234") => 5.3,
                    User.create!(password:"1234") => 10.0,
                    User.create!(password:"1234") => 5.1,
                    User.create!(password:"1234") => 1.0,
@@ -149,8 +149,8 @@ describe SquaringEvent do
                    User.create!(password:"1234") => 10.0}
     end
 
-    it "returns between 0 and n-1 transactions for a group of size n, which close out all debts" do 
-      expect(@se.square(@debtors, @creditors).length).to eq(10)
+    it "returns between 0 and n-1 transactions for a group of size n, which close out all debts" do
+      expect(@se.consolidated_transactions(@debtors, @creditors).length).to eq(10)
     end
   end
 
@@ -169,12 +169,12 @@ describe SquaringEvent do
       expect(@se.new_transactions.last).to be_an_instance_of(Transaction)
     end
 
-    it "saves the transaction to the db" do 
+    it "does not save the transaction to the db" do
       starting = Transaction.all.size
       @se.create_transaction(payment_match)
       ending = Transaction.all.size
 
-      expect(ending).to eq(starting+1)
+      expect(ending).to eq(starting)
     end
   end
 

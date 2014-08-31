@@ -23,8 +23,8 @@
 <%= link_to "Square ME!", new_user_group_squaring_event_path(@user.id,@group.id) %></br>
 <%= link_to "Cancel", user_path(@user) %>
 </div>
-<div id="user" visability="hidden"><%=@user.id%></div>
-<div id="user_name" visability="hidden"><%=@user.first_name%></div>
-<div id="group" visability="hidden"><%=@group.id%></div>
+<div id="user" style="display:none"><%=@user.id%></div>
+<div id="user_name" style="display:none"><%=@user.first_name%></div>
+<div id="group" style="display:none"><%=@group.id%></div>
 
 <!-- "/users/#{@user.id}/groups/#{@group.id}/squaring_events/new" -->
