@@ -9,8 +9,9 @@ class Group < ActiveRecord::Base
 
   def square
   	square = SquaringEvent.create(group_id: self.id)
-  	square.square(debtors, creditors)
+  	new_transactions = square.square(debtors, creditors)
   	close_old_transactions(square)
+  	new_transactions
   end
 
   def debtors

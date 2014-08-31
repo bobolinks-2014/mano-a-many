@@ -45,10 +45,10 @@ describe Group do
       membership2 = Membership.create!(user: @user2, group_id: @group.id)
       transaction1 = Transaction.create!(debtor_id: @user1.id, creditor_id: @user2.id, amount: 10, description: "Blah")
     end
-    it "should return creditors of a group" do
+    it "should return creditors of a group2" do
       expect(@group.creditors.length).to eq(1)
     end
-    it "should return debtors of a group" do
+    it "should return debtors of a group2" do
       expect(@group.debtors.length).to eq(1)
     end
     it "should return transaction if not square" do
