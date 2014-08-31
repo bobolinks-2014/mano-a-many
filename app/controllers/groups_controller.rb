@@ -15,12 +15,14 @@ class GroupsController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
     @square = SquaringEvent.new
-    @group_transactions = Transaction.where("debtor_id = ? OR creditor_id = ?", current_user.id, current_user.id).reverse_order
     @group = Group.find(params[:id])
+
+
+    @group_transactions = Transaction.where("debtor_id = ? OR creditor_id = ?", current_user.id, current_user.id).reverse_order
   end
 
   def update
-    @newUser = User.find_by(email: params["email"])
+    @newUser = User.find_by(email: params[:email])
     if @newUser
       @group = Group.find(params["id"])
       @group.users << @newUser
@@ -30,6 +32,7 @@ class GroupsController < ApplicationController
       msg = "We're Sorry, invalid e-mail"
     end
     respond_to do |format|
+      format.js   { render :json => msg }
       format.json  { render :json => msg }
     end
   end

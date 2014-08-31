@@ -31,7 +31,7 @@
 <%= link_to "Square ME!", new_user_group_squaring_event_path(@user.id,@group.id) %></br>
 <%= link_to "Cancel", user_path(@user) %>
 </div>
-<div id="user" visability="none"><%=@user.id%></div>
-<div id="group" visability="none"><%=@group.id%></div>
+<div id="user" visability="hidden"><%=@user.id%></div>
+<div id="group" visability="hidden"><%=@group.id%></div>
 
 <!-- "/users/#{@user.id}/groups/#{@group.id}/squaring_events/new" -->
