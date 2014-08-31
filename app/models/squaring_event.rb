@@ -1,9 +1,11 @@
 class SquaringEvent < ActiveRecord::Base
   has_many :transactions
+  has_many :user_squarings
+  has_many :users, through: :user_squarings
   belongs_to :group
 
-  attr_accessor :debtors, :creditors
-  attr_reader :new_transactions
+  attr_accessor :debtors, :creditors, :new_transactions
+  # attr_reader 
 
 
   def square(debtors, creditors)
@@ -11,7 +13,6 @@ class SquaringEvent < ActiveRecord::Base
     @creditors = creditors
     @new_transactions = []
     until bal_is_zero?
-      p bal_is_zero?
       payment_match = ez_match || high_low_match
       create_transaction(payment_match)
       update_debtors_creditors(payment_match)
@@ -60,7 +61,7 @@ class SquaringEvent < ActiveRecord::Base
   end
 
   def create_transaction(payment_match)
-    trans = Transaction.new(debtor_id: payment_match[:debtor].id,
+    trans = Transaction.create!(debtor_id: payment_match[:debtor].id,
                             creditor_id: payment_match[:creditor].id,
                             amount: payment_match[:bal],
                             squaring_event_id: self.id,
@@ -68,8 +69,9 @@ class SquaringEvent < ActiveRecord::Base
                             closed: false,
                             description: "squaring event #{self.id}",
                             private_trans: false)
-    
+    @new_transactions ||= []
     @new_transactions << trans
+
   end
 
   def update_debtors_creditors(payment_match)
