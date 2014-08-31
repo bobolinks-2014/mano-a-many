@@ -1,4 +1,4 @@
-class GroupsController < ApplicationController
+  class GroupsController < ApplicationController
   def index
   end
 
@@ -18,7 +18,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
 
-    @group_transactions = Transaction.where("debtor_id = ? OR creditor_id = ?", current_user.id, current_user.id).reverse_order
+    # Transaction.where("debtor_id = ? OR creditor_id = ?", current_user.id, current_user.id).reverse_order
   end
 
   def update
@@ -27,7 +27,8 @@ class GroupsController < ApplicationController
       @group = Group.find(params["id"])
       @group.users << @newUser
       @group.save
-      msg = @newUser
+      @group_transactions = @group.transactions
+      msg = {user: @newUser,group: @group_transactions}
     else
       msg = "We're Sorry, invalid e-mail"
     end

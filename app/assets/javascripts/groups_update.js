@@ -12,8 +12,12 @@ $(function(){
       data: {email: email}
     })
     .done(function( response ){
-      console.log(response.first_name)
-      $('#added_friends ul').append("<li>"+response.first_name+"</li>");
+      $('#added_friends ul').append("<li>"+response.user.first_name+"</li>");
+      response.group.forEach(function(object, index, group){
+        // $('.transactions-for-group').
+        $('.transactions-for-group').append("<li>"+object.amount+"</li>");
+      });
+
     });
 
 
