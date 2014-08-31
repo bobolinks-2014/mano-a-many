@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   resources :users do
     resources :transactions
     resources :groups, except: [:destroy] do
-      resources :user_squarings, only: [:index, :new, :show, :create]
+      resources :squaring_events, only: [:index, :new, :show, :create]
     end
-    resources :user_squarings, only: [:index, :create, :new, :show]
+    resources :squaring_events, only: [:index, :create, :new, :show]
   end
 end

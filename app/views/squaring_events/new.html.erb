@@ -1,30 +1,10 @@
-<!-- Square Up making page -->
-<div id="square-up-page-content">
+group.users.each do |member|
+	"member.first_name member.last_name: member.email"
+end
 
-<!-- 	on button click, User.find_by(email: params)
-	add li tag with "first_name last_name: email"
-	add li with transaction (line 18ff) -->
+group.squared_transactions.each do |transaction|
+	"#{transaction.debtor.first_name} owes #{transaction.creditor.last_name} $#{transaction.amount}!"
+end
 
-
-	<div id="add-friends-form">
-		<%= form_for @user do |f| %>
-	    <%= f.text_field :friend_email, placeholder: "friend's email" %>
-	    <%= f.submit "add friend", class: "button" %>
-		<% end %>
-	</div>
-	</br>
-	<h4>Transactions</h4>
-	<div class="transactions-for-group">
-		<ul class="transactions-list-for-square">
-			<% @group_transactions.each do |transaction| %>
-				<% if transaction.creditor == @user %>
-					<li>You lent $<%= transaction.amount %>, to <%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %>, for <%= transaction.description %></li>
-				<% else %>
-					<li>You borrowed $<%= transaction.amount %>, from <%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %>, for <%= transaction.description %></li>
-				<% end %>
-			<% end %>
-		</ul>
-	</div>
-<%= link_to "Square ME!", new_user_group_user_squaring(@user) %></br>
-<%= link_to "Cancel", user_path(@user) %>
-</div>
+link_to "Approve", /users/:user_id/groups/:group_id/squaring_events, method: :post
+link_to "Cancel", users_path
