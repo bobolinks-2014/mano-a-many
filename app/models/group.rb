@@ -5,12 +5,20 @@ class Group < ActiveRecord::Base
   has_many :memberships
   has_many :users, :through => :memberships
 
-  attr_reader :debtors, :creditors
+  attr_reader :debtors, :creditors, :square
+  attr_accessor :new_transactions
 
-  def square
-  	square = SquaringEvent.create(group_id: self.id)
-  	close_old_transactions(square)
-  	new_transactions = square.square(debtors, creditors)
+  def preview_new_transactions
+  	@square = SquaringEvent.new(group_id: self.id)
+  	@new_transactions = @square.consolidated_transactions(debtors, creditors)
+  end
+
+  def save_transactions
+    preview_new_transactions
+    close_old_transactions
+    @new_transactions.each do |transaction|
+      transaction.save
+    end
   end
 
   def debtors
@@ -46,20 +54,18 @@ class Group < ActiveRecord::Base
   		all_transactions << user.debits.where(debtor_id: user_ids)
   	end
   	all_transactions.flatten!
-  	
-  	all_transactions.delete_if do |transaction| 
-  		transaction.private_trans == true || transaction.closed == true 
+
+  	all_transactions.delete_if do |transaction|
+  		transaction.private_trans == true || transaction.closed == true
   	end
 
-  	# return all_transactions
   end
 
-  def close_old_transactions(square)
+  def close_old_transactions
 
-  	# binding.pry
   	transactions.each do |transaction|
-  		transaction.update(squaring_event_id: square.id, closed: true)
-  	
+  		transaction.update(squaring_event_id: @square.id, closed: true)
+
   	end
 
   end

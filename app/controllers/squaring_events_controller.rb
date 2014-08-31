@@ -1,3 +1,4 @@
+require 'pry'
 class SquaringEventsController < ApplicationController
 
 	def index
@@ -9,19 +10,18 @@ class SquaringEventsController < ApplicationController
 		# current_user
 		@user = User.find(params[:user_id])
 		@square = SquaringEvent.new
-		@group_transactions = Transaction.where("debtor_id = ? OR creditor_id = ?", current_user.id, current_user.id).reverse_order
 		@group = Group.find(params[:group_id])
+		@group_transactions = @group.preview_new_transactions
 	end
 
 	#on press of square up button: creates new square
 	def create
-		if false
-				#insert logic
-			redirect_to user_url(@user)
-		else
-			flash.notice = "Square up failed. Try again."
-  		render 'new'
-		end
+		@group = Group.find(params[:group_id])
+		@group.save_transactions
+
+		redirect_to user_path(params[:user_id])
 	end
+
+
 
 end

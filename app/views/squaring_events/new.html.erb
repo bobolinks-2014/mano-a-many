@@ -10,7 +10,7 @@
   <% @group_transactions.each do |transaction| %>
     <dl class="accordion" data-accordion>
       <dd class="accordion-navigation">
-        <a href="#panel1"><%= transaction.debtor.first_name %> owes <%= transaction.creditor.first_name %> <%= number_to_currency(transaction.amount) %> <%= transaction.created_at.strftime("from %m/%d/%Y") %></a>
+        <a href="#panel1"><%= transaction.debtor.first_name %> owes <%= transaction.creditor.first_name %> <%= number_to_currency(transaction.amount) %> </a>
         <div id="panel1" class="content">
           <table>
             <thead>
@@ -24,7 +24,6 @@
             </thead>
             <tbody>
               <tr>
-                <td><%= transaction.created_at.to_formatted_s(:long) %></td>
                 <td><%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %></td>
                 <td><%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %></td>
                 <td><%= number_to_currency(transaction.amount) %></td>
@@ -36,6 +35,12 @@
       </dd>
     </dl>
   <% end %>
+  </div>
+  <div>
+    <a href="<%=user_path(@user)%>" class="button red" id="cancel">Cancel</a>
+    <%= form_for(@square, url: { controller: "squaring_events", action: "create" }, method: :post) do |f| %>
+      <%= f.submit "Approve!", class: "button" %>
+    <% end %>
   </div>
 
 

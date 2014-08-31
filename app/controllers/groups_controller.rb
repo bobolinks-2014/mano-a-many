@@ -25,9 +25,11 @@
     @newUser = User.find_by(email: params[:email])
     if @newUser
       @group = Group.find(params["id"])
+      oldTransactions = @group.transactions
       @group.users << @newUser
       @group.save
-      @group_transactions = @group.transactions
+      allTransactions = @group.transactions
+      @group_transactions = allTransactions - oldTransactions
       msg = {user: @newUser,group: @group_transactions}
     else
       msg = "We're Sorry, invalid e-mail"
