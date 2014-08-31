@@ -22,8 +22,9 @@ class Group < ActiveRecord::Base
     		debtors[user] = balance
   		end
 		end
+
 		return debtors
-	end  	
+	end
 
   def creditors
 	  users = self.users
