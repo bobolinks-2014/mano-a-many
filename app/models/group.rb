@@ -53,11 +53,13 @@ class Group < ActiveRecord::Base
   	# return all_transactions
   end
 
-  # def close_old_transactions(square)
+  def close_old_transactions(square)
 
-  # 	transactions.each do |transaction|
-  # 		transaction.update(squaring_event_id: square.id, closed: true)
+  	# binding.pry
+  	transactions.each do |transaction|
+  		transaction.update(squaring_event_id: square.id, closed: true)
   	
-  # 	end
-  # end
+  	end
+
+  end
 end
