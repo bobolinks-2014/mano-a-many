@@ -1,4 +1,5 @@
 require 'pry'
+require 'pp'
 class Group < ActiveRecord::Base
   has_many :squaring_events
   has_many :memberships
@@ -48,12 +49,15 @@ class Group < ActiveRecord::Base
   	all_transactions.delete_if do |transaction| 
   		transaction.private_trans == true || transaction.closed == true 
   	end
+
+  	# return all_transactions
   end
 
   # def close_old_transactions(square)
+
   # 	transactions.each do |transaction|
   # 		transaction.update(squaring_event_id: square.id, closed: true)
-	 #  	# binding.pry
+  	
   # 	end
   # end
 end

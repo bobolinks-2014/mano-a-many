@@ -22,6 +22,11 @@ Transaction.create!(debtor_id: 1, creditor_id: 3, amount: 5, description: Faker:
 Transaction.create!(debtor_id: 2, creditor_id: 4, amount: 5, description: Faker::Hacker.say_something_smart, approved: true, closed: false, squaring_event_id: nil, private_trans: false)
 Transaction.create!(debtor_id: 3, creditor_id: 4, amount: 10, description: Faker::Hacker.say_something_smart, approved: true, closed: false, squaring_event_id: nil, private_trans: false)
 
+Group.create
+Membership.create!(user_id: 1, group_id:1)
+Membership.create!(user_id: 2, group_id:1)
+Membership.create!(user_id: 3, group_id:1)
+Membership.create!(user_id: 4, group_id:1)
 #joey   = 1
 #jeff   = 2
 #steve  = 3

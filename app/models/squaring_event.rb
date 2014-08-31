@@ -13,7 +13,6 @@ class SquaringEvent < ActiveRecord::Base
     @creditors = creditors
     @new_transactions = []
     until bal_is_zero?
-      p bal_is_zero?
       payment_match = ez_match || high_low_match
       create_transaction(payment_match)
       update_debtors_creditors(payment_match)
