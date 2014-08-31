@@ -1,10 +1,41 @@
-<!-- group.users.each do |member|
-	"member.first_name member.last_name: member.email"
-end
 
-group.squared_transactions.each do |transaction|
-	"#{transaction.debtor.first_name} owes #{transaction.creditor.first_name} $#{transaction.amount}!"
-end
+  <div class="group_users">
+  <% @group.users.each do |member| %>
+    <h4><%= member.first_name %> <%= member.last_name %></h3>
+    <p> <%= member.email %></p>
+  <% end %>
+  </div>
 
-link_to "Approve", /users/:user_id/groups/:group_id/squaring_events, method: :post
-link_to "Cancel", users_path -->
+  <div class group_transactions>
+  <% @group_transactions.each do |transaction| %>
+    <dl class="accordion" data-accordion>
+      <dd class="accordion-navigation">
+        <a href="#panel1"><%= transaction.debtor.first_name %> owes <%= transaction.creditor.first_name %> <%= number_to_currency(transaction.amount) %> <%= transaction.created_at.strftime("from %m/%d/%Y") %></a>
+        <div id="panel1" class="content">
+          <table>
+            <thead>
+              <tr>
+                <th width="120">Date</th>
+                <th width="120">Borrower</th>
+                <th width="120">Lender</th>
+                <th width="80">Amount</th>
+                <th width="200">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= transaction.created_at.to_formatted_s(:long) %></td>
+                <td><%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %></td>
+                <td><%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %></td>
+                <td><%= number_to_currency(transaction.amount) %></td>
+                <td><%= transaction.description %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </dd>
+    </dl>
+  <% end %>
+  </div>
+
+
