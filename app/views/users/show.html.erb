@@ -4,15 +4,37 @@
 <div id="profile-page-content">
 	<h2>Welcome, <%= @user.first_name %> <%= @user.last_name %>.</h2>
 	<h3>Transactions</h3>
-	<div class="transactions-for-user">
-		<ul class="transactions-list">
-			<% @transactions.each do |transaction| %>
-				<% if transaction.creditor == @user %>
-					<li>You lent $<%= transaction.amount %>, to <%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %>, for <%= transaction.description %></li>
-				<% else %>
-					<li>You borrowed $<%= transaction.amount %>, from <%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %>, for <%= transaction.description %></li>
-				<% end %>
-			<% end %>
-		</ul>
-	</div>
-</div>
+
+<div class group_transactions>
+  <% @transactions.each do |transaction| %>
+    <dl class="accordion" data-accordion>
+      <dd class="accordion-navigation">
+        <a href="#panel1">You lent <strong><%= number_to_currency(transaction.amount) %></strong>, to <strong><%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %></strong>, for <%= transaction.description %></a>
+        <div id="panel1" class="content">
+          <table>
+            <thead>
+              <tr>
+                <th width="120">Date</th>
+                <th width="120">Borrower</th>
+                <th width="120">Lender</th>
+                <th width="80">Amount</th>
+                <th width="200">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= transaction.created_at.to_formatted_s(:long) %></td>
+                <td><%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %></td>
+                <td><%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %></td>
+                <td><%= number_to_currency(transaction.amount) %></td>
+                <td><%= transaction.description %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </dd>
+    </dl>
+  <% end %>
+  </div>
+
+
