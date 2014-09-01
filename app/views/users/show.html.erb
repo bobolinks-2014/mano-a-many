@@ -34,10 +34,11 @@
                 <td><%= transaction.description %></td>
                 <% if transaction.closed == true %>
                 	<td>Paid</td>
+                	<td></td>
                 <% else %>
                 	<td>Unpaid</td>
+                	<td><%= link_to 'mark as paid', user_transaction_path(@user, transaction), method: :patch %></td>
                 <% end %>
-                <td><%= link_to 'mark as paid', user_transaction_path(@user, transaction), method: :patch %></td>
               </tr>
             </tbody>
           </table>
