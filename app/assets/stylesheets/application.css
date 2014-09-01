@@ -24,6 +24,19 @@ li {
  list-style: none;
 }
 
+#title-logo {
+	color: white;
+	font-weight: 300;
+}
+
+#top-nav-bar {
+	text-align: right;
+	padding-right: 60px;
+}
+
+#add-trans-link {
+	text-align: right;
+}
 /* body {
  	font-family: verdana;
  	margin:auto;

@@ -1,5 +1,5 @@
 <!-- user profile page: shown after login -->
-<%= link_to "Add Transaction", new_user_transaction_path(@user) %></br>
+<div id="add-trans-link"><%= link_to "Add Transaction", new_user_transaction_path(@user) %></br></div>
 <div id="create-square-up"><%= link_to "Create Square Up", "/users/#{@user.id}/groups", method: :post %></div>
 <div id="profile-page-content">
 	<h2>Welcome, <%= @user.first_name %> <%= @user.last_name %>.</h2>
