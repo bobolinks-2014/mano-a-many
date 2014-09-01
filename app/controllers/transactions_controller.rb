@@ -22,6 +22,15 @@ class TransactionsController < ApplicationController
 		end
 	end
 
+	def update
+		@transaction = Transaction.find(params[:id])
+		@transaction.closed = true
+		@transaction.save
+		redirect_to user_path(current_user)
+	end
+
+
+
 private #-------------------#
 
 	def find_friend
@@ -41,7 +50,7 @@ private #-------------------#
 	end
 
 	def transaction_as_creditor
-		@transaction = Transaction.new(debtor: @friend, creditor: current_user, amount: transaction_params[:amount], description: transaction_params[:description], private_trans: private_transaction?, approved: false)			
+		@transaction = Transaction.new(debtor: @friend, creditor: current_user, amount: transaction_params[:amount], description: transaction_params[:description], private_trans: private_transaction?, approved: false)
 	end
 
 end
