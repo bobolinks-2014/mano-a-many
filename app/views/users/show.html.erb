@@ -33,7 +33,7 @@
                 <td><%= number_to_currency(transaction.amount) %></td>
                 <td><%= transaction.description %></td>
                 <% if transaction.closed == true %>
-                	<td>Paid</td>
+                	<td class="marked-paid">Paid</td>
                 	<td></td>
                 <% else %>
                 	<td>Unpaid</td>

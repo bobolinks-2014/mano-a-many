@@ -28,5 +28,9 @@ $(function(){
 
   });
 
+  $('.marked-paid').parent().parent().parent().parent().parent().css({
+    opacity: "0.5"
+  });
+
 
 });

@@ -37,6 +37,11 @@ li {
 #add-trans-link {
 	text-align: right;
 }
+
+.accordion .accordion-navigation, .accordion dd {
+	border: 3px solid gray;
+	margin-bottom: 5px !important;
+}
 /* body {
  	font-family: verdana;
  	margin:auto;
