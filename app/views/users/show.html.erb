@@ -22,6 +22,8 @@
                 <th width="120">Lender</th>
                 <th width="80">Amount</th>
                 <th width="200">Description</th>
+                <th width="100">Status</th>
+                <th width="100"></th>
               </tr>
             </thead>
             <tbody>
@@ -30,6 +32,12 @@
                 <td><%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %></td>
                 <td><%= number_to_currency(transaction.amount) %></td>
                 <td><%= transaction.description %></td>
+                <% if transaction.closed == true %>
+                	<td>Paid</td>
+                <% else %>
+                	<td>Unpaid</td>
+                <% end %>
+                <td><%= link_to 'mark as paid', user_transaction_path(@user, transaction), method: :patch %></td>
               </tr>
             </tbody>
           </table>
