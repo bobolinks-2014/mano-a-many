@@ -65,7 +65,7 @@ class SquaringEvent < ActiveRecord::Base
                             squaring_event_id: self.id,
                             approved: true,
                             closed: false,
-                            description: "squaring event #{self.id}",
+                            description: "Squaring event on #{DateTime.now.strftime('%a %d %b %Y') }",
                             private_trans: false)
     @new_transactions ||= []
     @new_transactions << trans
