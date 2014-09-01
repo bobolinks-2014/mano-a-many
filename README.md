@@ -19,8 +19,8 @@ Log in or create an account.
 Create a transaction by supplying the email of another registered user.
 Settle up any number of users by pressing settle up.  All transactions the group members were involved in will be included. The app will return a list of settle up transactions to clear all of the debts.
 
-##Tests
-We ain't got no tests.
+##Methodology
+Given a group, we count each user's credits against their debits, arriving at a positive or negative balance from relative to the rest of the group. We then consolidate all transactions down to fewer than N-1, where N is the size of the gorup. [Read this paper](http://www.mathmeth.com/tom/files/settling-debts.pdf) for more details on the pairing algorithm.
 
 ##Programmers
 * Tanner Blumer
