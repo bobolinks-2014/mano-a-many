@@ -5,16 +5,19 @@
 	<h2>Welcome, <%= @user.first_name %> <%= @user.last_name %>.</h2>
 	<h3>Transactions</h3>
 
-<div class group_transactions>
+  <div class group_transactions>
   <% @transactions.each do |transaction| %>
     <dl class="accordion" data-accordion>
       <dd class="accordion-navigation">
-        <a href="#panel1">You lent <strong><%= number_to_currency(transaction.amount) %></strong>, to <strong><%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %></strong>, for <%= transaction.description %></a>
+        <% if current_user == transaction.debtor %>
+          <a href="#panel1">You owe <%= transaction.creditor.first_name %> <%= number_to_currency(transaction.amount) %> </a>
+        <% else %>
+          <a href="#panel1"><%= transaction.debtor.first_name %> owes You <%= number_to_currency(transaction.amount) %> </a>
+        <% end %>
         <div id="panel1" class="content">
           <table>
             <thead>
               <tr>
-                <th width="120">Date</th>
                 <th width="120">Borrower</th>
                 <th width="120">Lender</th>
                 <th width="80">Amount</th>
@@ -23,7 +26,6 @@
             </thead>
             <tbody>
               <tr>
-                <td><%= transaction.created_at.to_formatted_s(:long) %></td>
                 <td><%= transaction.debtor.first_name %> <%= transaction.debtor.last_name %></td>
                 <td><%= transaction.creditor.first_name %> <%= transaction.creditor.last_name %></td>
                 <td><%= number_to_currency(transaction.amount) %></td>
