@@ -20,6 +20,10 @@ div#create-square-up {
 	text-align: right;
 }
 
+li {
+ list-style: none;
+}
+
 /* body {
  	font-family: verdana;
  	margin:auto;
@@ -53,7 +57,7 @@ div#create-square-up {
 }
 
 #registration-content {
-	border: 2px solid gray;	
+	border: 2px solid gray;
 	margin:auto;
 	width: 40%;
 	padding: 10px;

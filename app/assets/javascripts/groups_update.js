@@ -16,11 +16,11 @@ $(function(){
       data: {email: email}
     })
     .done(function( response ){
-      $('#added_friends ul').append("<li>"+response.user.first_name+"</li>");
+      $('#added_friends ul').append("<li><h4>"+response.user.first_name + " " + response.user.last_name+"</h4></li><p>"+response.user.email+"</p><hr>");
       groupHash[response.user.id] = response.user.first_name;
       response.group.forEach(function(object, index, group){
-
-        $('.transactions-for-group').append("<li>"+groupHash[object.debtor_id]+ " owes:  "+groupHash[object.creditor_id]+": "+object.amount+"</li>");
+        $('.transactions-for-group').append("<li>"+groupHash[object.debtor_id]+ " owes  "+groupHash[object.creditor_id]+" - $"+object.amount+"</li>");
+      $('#group_users').val("");
       });
 
     });
