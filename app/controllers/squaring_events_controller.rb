@@ -11,6 +11,7 @@ class SquaringEventsController < ApplicationController
 		@user = User.find(params[:user_id])
 		@square = SquaringEvent.new
 		@group = Group.find(params[:group_id])
+
 		@group_transactions = @group.preview_new_transactions
 	end
 

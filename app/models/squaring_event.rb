@@ -5,8 +5,6 @@ class SquaringEvent < ActiveRecord::Base
   belongs_to :group
 
   attr_accessor :debtors, :creditors, :new_transactions
-  # attr_reader
-
 
   def consolidated_transactions(debtors, creditors)
     @debtors = debtors

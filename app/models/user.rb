@@ -7,18 +7,18 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :groups, :through => :memberships
 
-
   has_secure_password
 
-  def find_balance(users=nil)
-    sum_debits(users) - sum_credits(users)
+  def find_balance(transactions=nil)
+    sum_debits(transactions) - sum_credits(transactions)
   end
 
-  def sum_debits(users=nil)
-    if users
-      self.debits.inject(0) do |sum, debit|
-        (users.include? debit.debtor) ? (sum + debit.amount) : sum
+  def sum_debits(transactions=nil)
+    if transactions
+      transactions.inject(0) do |sum, transaction|
+        transaction.creditor_id == self.id ? transaction.amount + sum : sum
       end
+
     else
       self.debits.inject(0) do |sum, debit|
         (sum + debit.amount)
@@ -26,19 +26,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def sum_credits(users=nil)
-    if users
-      self.credits.inject(0) do |sum, credit|
-        (users.include? credit.creditor) ? (sum + credit.amount) : sum
+  def sum_credits(transactions=nil)
+    if transactions
+      transactions.inject(0) do |sum, transaction|
+        transaction.debtor_id == self.id ? transaction.amount + sum : sum
       end
     else
       self.credits.inject(0) do |sum, credit|
         (sum + credit.amount)
       end
     end
-  end
-
-  def friend_email
   end
 
 end

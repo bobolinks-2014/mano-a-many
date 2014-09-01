@@ -16,29 +16,27 @@ class Group < ActiveRecord::Base
   def save_transactions
     preview_new_transactions
     close_old_transactions
+
     @new_transactions.each do |transaction|
       transaction.save
     end
   end
 
   def debtors
-	  users = self.users
 	  debtors = Hash.new
-    users.each do |user|
-    	balance = user.find_balance(users)
+    self.users.each do |user|
+    	balance = user.find_balance(transactions)
     	if balance < 0
     		debtors[user] = balance
   		end
 		end
-
 		return debtors
 	end
 
   def creditors
-	  users = self.users
     creditors = Hash.new
-    users.each do |user|
-    	balance = user.find_balance(users)
+    self.users.each do |user|
+    	balance = user.find_balance(transactions)
     	if balance > 0
     		creditors[user] = balance
     	end
@@ -62,11 +60,8 @@ class Group < ActiveRecord::Base
   end
 
   def close_old_transactions
-
   	transactions.each do |transaction|
   		transaction.update(squaring_event_id: @square.id, closed: true)
-
   	end
-
   end
 end
